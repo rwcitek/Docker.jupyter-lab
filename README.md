@@ -1,6 +1,8 @@
 # Running Jupyter lab from within Docker
 
-This runs a Jupyter lab within Docker and listens on port :5051.
+This runs a Jupyter lab within Docker and listens on port :5051 on the Docker host.
+It also saves any created Jupyter notebooks on a shared folder with the host.
+This allows for notebooks to persist across different Docker container instances.
 
 ```bash
 SHARED=/tmp/zfoo
@@ -30,8 +32,8 @@ docker exec -i jupyter-lab /bin/bash -c 'cat > ~/.bash_aliases' <<'eof'
   export PS1='\u@\h: \w\n\$ ';
 eof
 
-host=192.168.1.8         # On the Mac
-host=127.0.0.1           # On a remote cloud instance usin ssh tunneling
+host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
+host=127.0.0.1           # On a remote cloud instance using ssh tunneling
 host=penguin.linux.test  # On a Chromebook
 
 echo
@@ -40,6 +42,7 @@ echo
 ```
 
 ## Dockerfile
+
 ```bash
 docker \
     run \
@@ -49,6 +52,4 @@ docker \
     rwcitek/rwc-jupyter-notebook:latest \
     /Dockerfile
 ```
-
-
 
