@@ -16,7 +16,7 @@ docker \
     -w /home/jovyan/shared \
     --name jupyter-lab \
     rwcitek/rwc-jupyter-notebook:latest \
-    >& /tmp/docker.log & sleep 5
+    >& /tmp/jupyter-notebook-docker.log & sleep 1
 
 docker exec -i jupyter-lab /bin/bash -c 'cat > ~/.bash_aliases' <<'eof'
   alias cls='clear';
@@ -36,8 +36,12 @@ host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
 host=127.0.0.1           # On a remote cloud instance using ssh tunneling
 host=penguin.linux.test  # On a Chromebook
 
+until grep -m1 -q -o token=.* /tmp/jupyter-notebook-docker.log ; do
+  sleep 2
+done
+
 echo
-echo http://${host}:5150/lab?$( grep -m1 -o token=.* /tmp/docker.log )
+echo http://${host}:5150/lab?$( grep -m1 -o token=.* /tmp/jupyter-notebook-docker.log )
 echo
 ```
 
@@ -47,7 +51,6 @@ echo
 docker \
     run \
     --rm \
-    -i \
     --entrypoint cat \
     rwcitek/rwc-jupyter-notebook:latest \
     /Dockerfile
