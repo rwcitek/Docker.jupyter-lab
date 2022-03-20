@@ -1,6 +1,8 @@
-# Running Jupyter lab from within Docker
+# Running Jupyter Lab from within Docker
 
 This runs a Jupyter lab within Docker and listens on port :5051 on the Docker host.
+The image builds upon the existing Docker image of [Jupyter Notebook](https://hub.docker.com/r/jupyter/datascience-notebook) by adding in
+engines for Julia and Bash, among others.
 It also saves any created Jupyter notebooks on a shared folder with the host.
 This allows for notebooks to persist across different Docker container instances.
 
@@ -15,7 +17,7 @@ docker \
     -v "${SHARED}":/home/jovyan/shared \
     -w /home/jovyan/shared \
     --name jupyter-lab \
-    rwcitek/rwc-jupyter-notebook:latest \
+    rwcitek/jupyter-notebook:latest \
     >& /tmp/jupyter-notebook-docker.log & sleep 1
 
 docker exec -i jupyter-lab /bin/bash -c 'cat > ~/.bash_aliases' <<'eof'
@@ -52,7 +54,12 @@ docker \
     run \
     --rm \
     --entrypoint cat \
-    rwcitek/rwc-jupyter-notebook:latest \
+    rwcitek/jupyter-notebook:latest \
     /Dockerfile
 ```
-
+## Docker build and push to Dockerhub
+```bash
+docker build --tag rwcitek/jupyter-notebook:latest docker/
+docker login
+docker push rwcitek/jupyter-notebook:latest
+```
