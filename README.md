@@ -6,7 +6,7 @@ engines for Julia and Bash, among others.
 It also saves any created Jupyter notebooks on a shared folder with the host.
 This allows for notebooks to persist across different Docker container instances.
 
-See https://hub.docker.com/repository/docker/rwcitek/rwc-jupyter-notebook on DockerHub.
+See https://hub.docker.com/repository/docker/rwcitek/jupyter-notebook on DockerHub.
 
 ```bash
 SHARED=/tmp/zfoo
