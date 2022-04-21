@@ -8,6 +8,7 @@ This allows for notebooks to persist across different Docker container instances
 
 See https://hub.docker.com/repository/docker/rwcitek/jupyter-notebook on DockerHub.
 
+## Launch container
 ```bash
 SHARED=/tmp/zfoo
 mkdir -p "${SHARED}"
@@ -22,6 +23,20 @@ docker \
     rwcitek/jupyter-notebook:latest \
     >& /tmp/jupyter-notebook-docker.log & sleep 1
 
+host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
+host=127.0.0.1           # On a remote cloud instance using ssh tunneling
+host=penguin.linux.test  # On a Chromebook
+
+until grep -m1 -q -o token=.* /tmp/jupyter-notebook-docker.log ; do
+  sleep 2
+done
+
+echo
+echo http://${host}:5150/lab?$( grep -m1 -o token=.* /tmp/jupyter-notebook-docker.log )
+echo
+```
+## Customize
+```bash
 docker exec -i jupyter-lab /bin/bash -c 'cat > ~/.bash_aliases' <<'eof'
   alias cls='clear';
   alias dir='ls -la';
@@ -35,20 +50,7 @@ docker exec -i jupyter-lab /bin/bash -c 'cat > ~/.bash_aliases' <<'eof'
   export IGNOREEOF=20;
   export PS1='\u@\h: \w\n\$ ';
 eof
-
-host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
-host=127.0.0.1           # On a remote cloud instance using ssh tunneling
-host=penguin.linux.test  # On a Chromebook
-
-until grep -m1 -q -o token=.* /tmp/jupyter-notebook-docker.log ; do
-  sleep 2
-done
-
-echo
-echo http://${host}:5150/lab?$( grep -m1 -o token=.* /tmp/jupyter-notebook-docker.log )
-echo
 ```
-
 ## Dockerfile
 
 ```bash
