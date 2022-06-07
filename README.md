@@ -51,6 +51,14 @@ docker exec -i jupyter-lab /bin/bash -c 'cat > ~/.bash_aliases' <<'eof'
   export PS1='\u@\h: \w\n\$ ';
 eof
 ```
+
+## Update pip modules
+```bash
+docker exec -i jupyter-lab /bin/bash <<'eof'
+    pip install --upgrade $( pip list | awk 'NR > 2 {print $1}' )
+eof
+```
+
 ## Dockerfile
 
 ```bash
