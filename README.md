@@ -26,13 +26,11 @@ host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
 host=127.0.0.1           # On a remote cloud instance using ssh tunneling
 host=penguin.linux.test  # On a Chromebook
 
-until docker container logs --since 10s jupyter-lab 2>&1 | grep -m1 -q -o token=.* ; do
+while true; do
+  token=$( docker container logs --since 5s jupyter-lab 2>&1 | grep -m1 -o token=.* )
+  [ "${token}" ] && echo -e "\n\n\nhttp://${host}:5150/lab?${token}\n\n\n" && break
   sleep 2
 done
-
-echo
-echo http://${host}:5150/lab?$( docker container logs --since 10s jupyter-lab 2>&1 | grep -m1 -o token=.* )
-echo
 ```
 ## Customize
 ```bash
