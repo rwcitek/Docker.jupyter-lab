@@ -14,25 +14,24 @@ SHARED=/tmp/zfoo
 mkdir -p "${SHARED}"
 docker \
     run \
-    --rm \
+    -d \
     -p :5150:8888 \
     -e JUPYTER_ENABLE_LAB=yes \
     -v "${SHARED}":/home/jovyan/shared \
     -w /home/jovyan/shared \
     --name jupyter-lab \
-    rwcitek/jupyter-notebook:latest \
-    >& /tmp/jupyter-notebook-docker.log & sleep 1
+    rwcitek/jupyter-notebook:latest
 
 host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
 host=127.0.0.1           # On a remote cloud instance using ssh tunneling
 host=penguin.linux.test  # On a Chromebook
 
-until grep -m1 -q -o token=.* /tmp/jupyter-notebook-docker.log ; do
+until docker container logs --since 10s jupyter-lab 2>&1 | grep -m1 -q -o token=.* ; do
   sleep 2
 done
 
 echo
-echo http://${host}:5150/lab?$( grep -m1 -o token=.* /tmp/jupyter-notebook-docker.log )
+echo http://${host}:5150/lab?$( docker container logs --since 10s jupyter-lab 2>&1 | grep -m1 -o token=.* )
 echo
 ```
 ## Customize
