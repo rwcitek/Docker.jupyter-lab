@@ -113,7 +113,7 @@ docker container rm jupyter-lab
 ```
 
 ## Dockerfile
-
+Since the Dockerfile is included with the image, it can be copied out of the image.
 ```bash
 docker \
     run \
@@ -123,6 +123,7 @@ docker \
     /Dockerfile
 ```
 ## Docker build and push to Dockerhub
+Once you have the Dockerfile, you can modify it and build a custom image.
 ```bash
 docker build --tag rwcitek/jupyter-notebook:latest docker/
 docker login
