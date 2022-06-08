@@ -53,6 +53,7 @@ eof
 ```bash
 docker exec -i jupyter-lab /bin/bash <<'eof'
     pip install --upgrade $( pip list | awk 'NR > 2 {print $1}' )
+    pip install openpyxl
 eof
 ```
 
