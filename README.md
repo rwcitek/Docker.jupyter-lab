@@ -50,6 +50,8 @@ eof
 ```
 
 ## Update pip modules
+Eventually, when the modules become too far out of date, I will update the base image.
+But for now, this is a way to update the instance.
 ```bash
 docker exec -i jupyter-lab /bin/bash <<'eof'
     pip install --upgrade $( pip list | awk 'NR > 2 {print $1}' )
