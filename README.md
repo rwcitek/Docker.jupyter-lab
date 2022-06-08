@@ -54,8 +54,12 @@ Eventually, when the modules become too far out of date, I will update the base 
 But for now, this is a way to update the instance.
 ```bash
 docker exec -i jupyter-lab /bin/bash <<'eof'
+    # you'd think there'd be a cleaner way to upgrade all installed packages
     pip install --upgrade $( pip list | awk 'NR > 2 {print $1}' )
-    pip install openpyxl
+    pip install \
+      dtale \
+      openpyxl \
+    ;
 eof
 ```
 
