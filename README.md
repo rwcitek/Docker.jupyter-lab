@@ -62,6 +62,8 @@ docker exec -i jupyter-lab /bin/bash <<'eof'
     ;
 eof
 ```
+Blog post about [D-Tale](https://towardsdatascience.com/d-tale-one-of-the-best-python-libraries-you-have-ever-seen-c2deecdfd2b)
+
 
 ## Container operations
 #### Pausing
