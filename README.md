@@ -65,7 +65,7 @@ eof
 
 ## Container operations
 #### Pausing
-Pausing the container temporarily "inactivates" it.  It no longer responds to requests nor work on any data.
+Pausing the container temporarily "inactivates" it.  It no longer responds to requests.
 However, as a process, it is still considered running.  The upshot is that the up-time is unaffected and 
 the same URL will work for connecting to it once you unpause it.
 ```bash
