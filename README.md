@@ -63,6 +63,55 @@ docker exec -i jupyter-lab /bin/bash <<'eof'
 eof
 ```
 
+## Container operations
+#### Pausing
+Pausing the container temporarily "inactivates" it.  It no longer responds to requests nor work on any data.
+However, as a process, it is still considered running.  The upshot is that the up-time is unaffected and 
+the same URL will work for connecting to it once you unpause it.
+```bash
+docker container pause jupyter-lab
+docker container unpause jupyter-lab
+
+# To redisplay the existing URL
+host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
+host=127.0.0.1           # On a remote cloud instance using ssh tunneling
+host=penguin.linux.test  # On a Chromebook
+
+token=$( docker container logs jupyter-lab 2>&1 | tac | grep -m1 -o token=.* )
+echo -e "\n\n\nhttp://${host}:5150/lab?${token}\n\n\n"
+```
+#### Stopping
+Stopping the container actually shuts it down.
+As a process, it is no longer running and therefore no longer responds to requests
+even though the filesystem for the container still exists.
+The upshot is that upon restarting, a new URL is created.
+```bash
+docker container stop jupyter-lab
+docker container start jupyter-lab
+# waiting for the new URL
+while true; do
+  token=$( docker container logs --since 5s jupyter-lab 2>&1 | grep -m1 -o token=.* )
+  [ "${token}" ] && echo -e "\n\n\nhttp://${host}:5150/lab?${token}\n\n\n" && break
+  sleep 2
+done
+```
+#### Commiting
+Commiting the container creates a new image from the existing container.
+This is not recommended, but can be useful in a pinch.
+The container can be in any state: running, paused, or stopped.
+The commit will pause the container and then unpause it upon completion.
+In this example, the epoch time is used as the image tag.
+```bash
+docker container commit jupyter-lab jupyter-lab-commit:$( date +%s )
+```
+#### Removing
+Removing the container does just that.
+The container has to be stopped first.
+```bash
+docker container stop jupyter-lab
+docker container rm jupyter-lab
+```
+
 ## Dockerfile
 
 ```bash
