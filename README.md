@@ -59,6 +59,7 @@ docker exec -i jupyter-lab /bin/bash <<'eof'
     pip install \
       dtale \
       openpyxl \
+      wquantiles \
     ;
 eof
 ```
