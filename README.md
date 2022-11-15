@@ -23,7 +23,7 @@ docker \
     rwcitek/jupyter-notebook:latest
 
 host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
-host=127.0.0.1           # On a remote cloud instance using ssh tunneling
+host=127.0.0.1           # On a remote cloud instance using ssh tunneling ( -L :5150:127.0.0.1:5150 )
 host=penguin.linux.test  # On a Chromebook
 
 while true; do
