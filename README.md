@@ -51,11 +51,26 @@ docker exec -i jupyter-lab /bin/bash -c 'cat > ~/.bash_aliases' <<'eof'
 eof
 ```
 
+## Update system packages
+Eventually, when the packages become too far out of date, I will update the base image.
+But for now, this is a way to update the instance.
+```bash
+<<'eof' docker exec -i -u root jupyter-lab /bin/bash
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get upgrade -y
+eof
+```
+
+You can also install Docker in the instance to enable "Docker-out-of-Docker."
+You will need to enable access to the socket ( see above comment during launch. )
+See this [DooD gist](https://gist.github.com/rwcitek/81a942d9b7e35d104e16d1591f93018a) for installation details.
+
 ## Update pip modules
 Eventually, when the modules become too far out of date, I will update the base image.
 But for now, this is a way to update the instance.
 ```bash
-docker exec -i jupyter-lab /bin/bash <<'eof'
+<<'eof' docker exec -i jupyter-lab /bin/bash
     # you'd think there'd be a cleaner way to upgrade all installed packages
     pip install --upgrade $( pip list | awk 'NR > 2 {print $1}' )
     pip install \
