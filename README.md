@@ -18,7 +18,7 @@ docker \
     -p :5150:8888 \
     -e JUPYTER_ENABLE_LAB=yes \
     -v "${SHARED}":/home/jovyan/shared \
-#  Uncomment next line to enable the socket for Docker-out-of-Docker
+#  Uncomment next line and delete this command to enable the socket for Docker-out-of-Docker
 #    -v /var/run/docker.sock:/var/run/docker.sock \
     -w /home/jovyan/shared \
     --name jupyter-lab \
@@ -62,9 +62,14 @@ But for now, this is a way to update the instance.
 eof
 ```
 
-You can also install Docker in the instance to enable "Docker-out-of-Docker."
-You will need to enable access to the socket ( see above comment during launch. )
+### Enabling Docker-out-of-Docker
+To enable "Docker-out-of-Docker", you will need to enable access to the socket ( see above comment during launch )
+and install Docker.
 See this [DooD gist](https://gist.github.com/rwcitek/81a942d9b7e35d104e16d1591f93018a) for installation details.
+
+### Installing a mongodb client
+See this [mongodb client gist](https://gist.github.com/rwcitek/597708aac17e7afa6163d45608b12c46) for
+installation details.
 
 ## Update pip modules
 Eventually, when the modules become too far out of date, I will update the base image.
