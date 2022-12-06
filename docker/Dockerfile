@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.3-labs
 
-FROM       jupyter/datascience-notebook:396024a4ddc1
+FROM       jupyter/datascience-notebook:ubuntu-22.04
 MAINTAINER robert.citek@gmail.com
 
 USER  root
