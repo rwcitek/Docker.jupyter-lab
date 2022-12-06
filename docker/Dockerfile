@@ -7,17 +7,18 @@ USER  root
 RUN   DEBIAN_FRONTEND=noninteractive && \
       apt-get update && \
       apt-get install -y \
-        ruby \
-        tree \
-        less \
         file \
-        rsync \
-        pandoc \
         graphviz \
+        jq \
+        less \
         man-db \
         mysql-client \
-        jq \
+        pandoc \
         poppler-utils \
+        postgresql-client \
+        rsync \
+        ruby \
+        tree \
         vim \
         ;
 RUN   pip install bash_kernel graphviz lxml html5lib
