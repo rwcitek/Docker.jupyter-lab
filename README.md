@@ -154,3 +154,10 @@ docker build --tag rwcitek/jupyter-notebook:latest docker/
 docker login
 docker push rwcitek/jupyter-notebook:latest
 ```
+Or build from the Dockerfile in Github
+```bash
+curl -s https://raw.githubusercontent.com/rwcitek/Docker.jupyter-lab/main/docker/Dockerfile |
+docker image build --tag rwcitek/jupyter-notebook:latest -
+```
+
+
