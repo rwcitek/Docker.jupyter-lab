@@ -18,6 +18,8 @@ docker \
     -p :5150:8888 \
     -e JUPYTER_ENABLE_LAB=yes \
     -v "${SHARED}":/home/jovyan/shared \
+#  Uncomment next line to enable the socket for Docker-out-of-Docker
+#    -v /var/run/docker.sock:/var/run/docker.sock \
     -w /home/jovyan/shared \
     --name jupyter-lab \
     rwcitek/jupyter-notebook:latest
