@@ -80,13 +80,16 @@ But for now, this is a way to update the instance.
     pip install --upgrade $( pip list | awk 'NR > 2 {print $1}' )
     pip install \
       dtale \
+      mitoinstaller \
       openpyxl \
       wquantiles \
     ;
+    python -m mitoinstaller install
 eof
 ```
 Blog post about [D-Tale](https://towardsdatascience.com/d-tale-one-of-the-best-python-libraries-you-have-ever-seen-c2deecdfd2b)
 
+Blog post about [mito](https://towardsdatascience.com/mito-part-1-an-introduction-a-python-package-which-will-improve-and-speed-up-your-analysis-17d9001bbfdc)
 
 ## Container operations
 #### Pausing
