@@ -1,6 +1,6 @@
 # Running Jupyter Lab from within Docker
 
-This runs a Jupyter lab within Docker and listens on port :5051 on the Docker host.
+This runs a Jupyter lab within Docker and listens on port :5150 on the Docker host.
 The image builds upon the existing Docker image of [Jupyter Notebook](https://hub.docker.com/r/jupyter/datascience-notebook) by adding in
 kernels for Julia and Bash, among others.
 It also saves any created Jupyter notebooks on a shared folder with the host.
