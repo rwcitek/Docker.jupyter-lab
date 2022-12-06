@@ -15,9 +15,11 @@ RUN   DEBIAN_FRONTEND=noninteractive && \
         pandoc \
         graphviz \
         man-db \
+        mysql-client \
         jq \
         poppler-utils \
-        vim
+        vim \
+        ;
 RUN   pip install bash_kernel graphviz lxml html5lib
 RUN   python -m bash_kernel.install
 
