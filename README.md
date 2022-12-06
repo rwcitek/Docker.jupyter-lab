@@ -10,7 +10,7 @@ See https://hub.docker.com/repository/docker/rwcitek/jupyter-notebook on DockerH
 
 ## Launch container
 ```bash
-SHARED=/tmp/zfoo
+SHARED=~/shared.jupyter-lab
 mkdir -p "${SHARED}"
 docker \
     run \
