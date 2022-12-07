@@ -32,7 +32,9 @@ while true; do
   token=$( docker container logs --since 5s jupyter-lab 2>&1 | grep -m1 -o token=.* )
   [ "${token}" ] && echo -e "\n\n\nhttp://${host}:5150/lab?${token}\n\n\n" && break
   sleep 2
-done
+done |
+tee /tmp/jupyter.url.token.txt
+
 ```
 ## Customize
 ```bash
@@ -63,13 +65,10 @@ eof
 ```
 
 ### Enabling Docker-out-of-Docker
-To enable "Docker-out-of-Docker", you will need to enable access to the socket ( see above comment during launch )
-and install Docker.
-See this [DooD gist](https://gist.github.com/rwcitek/81a942d9b7e35d104e16d1591f93018a) for installation details.
+To enable "Docker-out-of-Docker", you will need to enable access to the socket ( see above comment during launch ). 
+Docker is already installed.  See the Dockerfile or this [DooD gist](https://gist.github.com/rwcitek/81a942d9b7e35d104e16d1591f93018a) for installation details.
 
-### Installing a mongodb client
-See this [mongodb client gist](https://gist.github.com/rwcitek/597708aac17e7afa6163d45608b12c46) for
-installation details.
+DooD allows you to manage Docker resources on the host from within a container instance.  This definitely has some security risks.  But if you own the host and are the only user on the host, it can be extremely useful.
 
 ## Update pip modules
 Eventually, when the modules become too far out of date, I will update the base image.
@@ -126,7 +125,8 @@ while true; do
   token=$( docker container logs --since 5s jupyter-lab 2>&1 | grep -m1 -o token=.* )
   [ "${token}" ] && echo -e "\n\n\nhttp://${host}:5150/lab?${token}\n\n\n" && break
   sleep 2
-done
+done |
+tee /tmp/jupyter.url.token.txt
 ```
 #### Commiting
 Commiting the container creates a new image from the existing container.
