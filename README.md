@@ -8,6 +8,11 @@ This allows for notebooks to persist across different Docker container instances
 
 See https://hub.docker.com/repository/docker/rwcitek/jupyter-notebook on DockerHub.
 
+## Pull image ( optional )
+```bash
+docker image pull rwcitek/jupyter-notebook:latest
+```
+
 ## Launch container
 ```bash
 SHARED=~/shared.jupyter-lab
