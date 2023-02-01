@@ -30,8 +30,7 @@ docker \
     rwcitek/jupyter-notebook:latest
 
 host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
-host=127.0.0.1           # On a remote cloud instance using ssh tunneling ( -L :5150:127.0.0.1:5150 )
-host=penguin.linux.test  # On a Chromebook
+host=127.0.0.1           # On a Chromebook or remote cloud instance using ssh tunneling ( -L :5150:127.0.0.1:5150 )
 
 while true; do
   token=$( docker container logs --since 5s jupyter-lab 2>&1 | grep -m1 -o token=.* )
