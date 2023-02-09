@@ -64,7 +64,7 @@ But for now, this is a way to update the instance.
 <<'eof' docker exec -i -u root jupyter-lab /bin/bash
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
-    apt-get upgrade -y
+    apt-get dist-upgrade -y
 eof
 ```
 
