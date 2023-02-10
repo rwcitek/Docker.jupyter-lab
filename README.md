@@ -108,8 +108,7 @@ docker container unpause jupyter-lab
 
 # To redisplay the existing URL
 host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
-host=127.0.0.1           # On a remote cloud instance using ssh tunneling
-host=penguin.linux.test  # On a Chromebook
+host=127.0.0.1           # On a Chromebook or remote cloud instance using ssh tunneling ( -L :5150:127.0.0.1:5150 )
 
 token=$( docker container logs jupyter-lab 2>&1 | tac | grep -m1 -o token=.* )
 echo -e "\n\n\nhttp://${host}:5150/lab?${token}\n\n\n"
@@ -125,8 +124,7 @@ docker container start jupyter-lab
 
 # Wait for the new URL
 host=192.168.1.8         # On the Mac ( the IP of any interface on the host )
-host=127.0.0.1           # On a remote cloud instance using ssh tunneling
-host=penguin.linux.test  # On a Chromebook
+host=127.0.0.1           # On a Chromebook or remote cloud instance using ssh tunneling ( -L :5150:127.0.0.1:5150 )
 
 while true; do
   token=$( docker container logs --since 5s jupyter-lab 2>&1 | grep -m1 -o token=.* )
