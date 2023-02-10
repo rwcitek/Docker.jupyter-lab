@@ -65,6 +65,9 @@ But for now, this is a way to update the instance.
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
     apt-get dist-upgrade -y
+    apt-get install -y --no-install-recommends \
+        csvkit \
+        ;
 eof
 ```
 
