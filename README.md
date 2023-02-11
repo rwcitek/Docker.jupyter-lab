@@ -158,13 +158,17 @@ docker \
     --rm \
     --entrypoint cat \
     rwcitek/jupyter-notebook:latest \
-    /Dockerfile
+    /Dockerfile |
+  tee Dockerfile
 ```
 ## Docker build and push to Dockerhub
 Once you have the Dockerfile, you can modify it and build a custom image.
 ```bash
-docker build --tag rwcitek/jupyter-notebook:latest docker/
+tag=$( date +%s )
+docker build --tag rwcitek/jupyter-notebook:${tag} .
+docker image tag rwcitek/jupyter-notebook:${tag} rwcitek/jupyter-notebook:latest
 docker login
+docker push rwcitek/jupyter-notebook:${tag}
 docker push rwcitek/jupyter-notebook:latest
 ```
 Or build from the Dockerfile in Github
