@@ -15,6 +15,10 @@ docker image pull rwcitek/jupyter-notebook:latest
 
 ## Launch container
 ```bash
+DooD=""
+#  Uncomment next line to enable the socket for Docker-out-of-Docker
+#  DooD="-v /var/run/docker.sock:/var/run/docker.sock"
+
 SHARED=~/shared.jupyter-lab
 mkdir -p "${SHARED}"
 docker \
@@ -22,9 +26,7 @@ docker \
     -d \
     -p :5150:8888 \
     -e JUPYTER_ENABLE_LAB=yes \
-    -v "${SHARED}":/home/jovyan/shared \
-#  Uncomment next line and delete this command to enable the socket for Docker-out-of-Docker
-#    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v "${SHARED}":/home/jovyan/shared ${DooD} \
     -w /home/jovyan/shared \
     --name jupyter-lab \
     rwcitek/jupyter-notebook:latest
